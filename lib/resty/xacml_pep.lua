@@ -21,7 +21,7 @@ Copyright (C) 2017 ZmartZone IAM
 All rights reserved.
 
 For further information please contact:
- 
+
      ZmartZone IAM
      info@zmartzone.eu
      http://www.zmartzone.eu
@@ -144,19 +144,19 @@ function xacml_pep.pdp_decision(opts, subject, action, resource)
   key = xaml_pep_get_cache_key(subject, action, resource)
 
   -- see if we've previously cached the introspection result for this request
-  local json
+  local json, err
   local v = xacml_pep_cache_get("decision", key)
   if not v then
 
-    table = { Request = {
-              
+    local table = { Request = {
+
         AccessSubject = {
           Attribute = { {
             AttributeId = "urn:oasis:names:tc:xacml:1.0:subject:subject-id",
             Value = subject
           } }
         },
-        
+
         Action = {
           Attribute = { {
             AttributeId = "urn:oasis:names:tc:xacml:1.0:action:action-id",
@@ -170,13 +170,13 @@ function xacml_pep.pdp_decision(opts, subject, action, resource)
             Value = resource
           } }
         }
-        
+
     } }
-    
+
     -- call the PDP endpoint
-    body = cjson.encode(table)
+    local body = cjson.encode(table)
     json, err = xacml_pep_call_pdp_endpoint(opts, opts.pdp_endpoint, body, nil)
-    
+
     -- cache the results
     if json then
         ttl = opts.ttl or 300
