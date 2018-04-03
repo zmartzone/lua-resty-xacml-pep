@@ -17,7 +17,7 @@ specific language governing permissions and limitations
 under the License.
 
 ***************************************************************************
-Copyright (C) 2017 ZmartZone IAM
+Copyright (C) 2017-2018 ZmartZone IAM
 All rights reserved.
 
 For further information please contact:
@@ -54,7 +54,7 @@ local type    = type
 local ngx     = ngx
 
 local xacml_pep = {
-  _VERSION = "0.1.0"
+  _VERSION = "0.1.1"
 }
 xacml_pep.__index = xacml_pep
 
@@ -70,8 +70,7 @@ end
 -- retrieve value from server-wide cache if available
 local function xacml_pep_cache_get(type, key)
   local dict = ngx.shared[type]
-  local value
-  local flags
+  local value, flags
   if dict then
     value, flags = dict:get(key)
     if value then ngx.log(ngx.DEBUG, "cache hit: type=", type) end
@@ -82,8 +81,7 @@ end
 -- parse the JSON result from a call to the OP
 local function xacml_pep_parse_json_response(response)
 
-  local err
-  local res
+  local res, err
 
   -- check the response from the OP
   if response.status ~= 200 then
@@ -133,7 +131,7 @@ end
 
 -- assemble subject/action/resource cache key
 local function xaml_pep_get_cache_key(subject, action, resource)
-  input = (subject or "") .. (action or "") .. (resource or "")
+  local input = (subject or "") .. (action or "") .. (resource or "")
   return ngx.sha1_bin(input)
 end
 
@@ -141,7 +139,7 @@ end
 function xacml_pep.pdp_decision(opts, subject, action, resource)
 
   -- get a key that uniquely identifies this request in the decision cache
-  key = xaml_pep_get_cache_key(subject, action, resource)
+  local key = xaml_pep_get_cache_key(subject, action, resource)
 
   -- see if we've previously cached the introspection result for this request
   local json, err
