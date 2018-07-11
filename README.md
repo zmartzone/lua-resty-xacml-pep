@@ -29,6 +29,17 @@ to install one extra pure-Lua dependency that implements HTTP client functions:
 Copy `xacml_pep.lua` somewhere in your `lua_package_path` under a directory named `resty`.
 If you are using [OpenResty](http://openresty.org/), the default location would be `/usr/local/openresty/lualib/resty`.
 
+## Support
+
+#### Community Support
+For generic questions, see the Wiki pages with Frequently Asked Questions at:  
+  [https://github.com/zmartzone/lua-resty-xacml-pep/wiki](https://github.com/zmartzone/lua-resty-xacml-pep/wiki)  
+Any questions/issues should go to issues tracker.
+
+#### Commercial Services
+For commercial Support contracts, Professional Services, Training and use-case specific support you can contact:  
+  [sales@zmartzone.eu](mailto:sales@zmartzone.eu)  
+
 ## Sample Configuration
 
 ```
@@ -85,17 +96,8 @@ http {
 }
 ```
 
-## Support
-
-See the Wiki pages with Frequently Asked Questions at:  
-  https://github.com/zmartzone/lua-resty-xacml-pep/wiki  
-For commercial support and consultancy you can contact:  
-  [info@zmartzone.eu](mailto:info@zmartzone.eu)  
-
-Any questions/issues should go to issues tracker.
-
 Disclaimer
 ----------
 
-*See the DISCLAIMER file in this directory. For commercial support
-you can contact [ZmartZone IAM](https://www.zmartzone.eu) as described above.*
+*This software is open sourced by ZmartZone IAM. For commercial support
+you can contact [ZmartZone IAM](https://www.zmartzone.eu) as described above in the [Support](#support) section.*
